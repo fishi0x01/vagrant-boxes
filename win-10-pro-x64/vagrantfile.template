@@ -1,4 +1,17 @@
-Vagrant.require_version ">= 1.6.2"
+Vagrant.require_version ">= 2.0.0"
+
+# https://github.com/hashicorp/vagrant/issues/4649
+VIRTUALBOX_NEW_GEN = Gem::Version.new('6.1.0')
+vboxmanage = Vagrant::Util::Which.which("VBoxManage") || Vagrant::Util::Which.which("VBoxManage.exe")
+if vboxmanage == nil
+    abort "Cannot find VBoxManage executable"
+end
+version = Vagrant::Util::Subprocess.execute(vboxmanage, '--version').stdout.strip!
+clean_version = /[0-9]+\.[0-9]+\.[0-9]+/.match(version)
+clipboard_flag = "--clipboard-mode"
+if Gem::Version.new(clean_version) < VIRTUALBOX_NEW_GEN
+    clipboard_flag = "--clipboard"
+end
 
 Vagrant.configure("2") do |config|
     config.vm.define "vagrant-windows-10-pro-x64"
@@ -15,11 +28,11 @@ Vagrant.configure("2") do |config|
     config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     config.vm.provider :virtualbox do |v, override|
-        #v.gui = true
+        v.gui = true
         v.customize ["modifyvm", :id, "--memory", 2048]
         v.customize ["modifyvm", :id, "--cpus", 2]
         v.customize ["modifyvm", :id, "--vram", 128]
-        v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+        v.customize ["modifyvm", :id, clipboard_flag, "bidirectional"]
         v.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
     end
 end
