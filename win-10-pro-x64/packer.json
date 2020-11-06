@@ -1,16 +1,4 @@
 {
-  "variables": {
-    "disk_size": "61440",
-    "disk_type_id": "1",
-    "headless": "false",
-    "iso_checksum": "01bf1eb643f7e50d0438f4f74fb91468d35cde2c82b07abc1390d47fc6a356be",
-    "iso_checksum_type": "sha256",
-    "iso_url": "{{ template_dir }}/Win10_1909_English_x64.iso",
-    "restart_timeout": "5m",
-    "vhv_enable": "false",
-    "winrm_timeout": "1h",
-    "virtio_win_iso": "~/virtio-win.iso"
-  },
   "builders": [
     {
       "boot_command": "",
@@ -30,8 +18,7 @@
       "guest_additions_mode": "disable",
       "guest_os_type": "Windows10_64",
       "headless": "{{user `headless`}}",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum_type`}}:{{user `iso_checksum`}}",
       "iso_url": "{{user `iso_url`}}",
       "memory": 2048,
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
@@ -88,6 +75,18 @@
       ],
       "type": "windows-shell"
     }
-  ]
+  ],
+  "variables": {
+    "disk_size": "61440",
+    "disk_type_id": "1",
+    "headless": "false",
+    "iso_checksum": "e793f3c94d075b1aa710ec8d462cee77fde82caf400d143d68036f72c12d9a7e",
+    "iso_checksum_type": "sha256",
+    "iso_url": "{{ template_dir }}/Win10_20H2_English_x64.iso",
+    "restart_timeout": "5m",
+    "vhv_enable": "false",
+    "virtio_win_iso": "~/virtio-win.iso",
+    "winrm_timeout": "1h"
+  }
 }
 
