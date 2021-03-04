@@ -80,13 +80,12 @@
     "disk_size": "61440",
     "disk_type_id": "1",
     "headless": "false",
-    "iso_checksum": "e793f3c94d075b1aa710ec8d462cee77fde82caf400d143d68036f72c12d9a7e",
+    "iso_checksum": "6c6856405dbc7674eda21bc5f7094f5a18af5c9bacc67ed111e8f53f02e7d13d",
     "iso_checksum_type": "sha256",
-    "iso_url": "{{ template_dir }}/Win10_20H2_English_x64.iso",
+    "iso_url": "{{ template_dir }}/Win10_20H2_v2_English_x64.iso",
     "restart_timeout": "5m",
     "vhv_enable": "false",
     "virtio_win_iso": "~/virtio-win.iso",
     "winrm_timeout": "1h"
   }
 }
-
