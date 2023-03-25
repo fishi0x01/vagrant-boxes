@@ -1,3 +1,4 @@
+# TODO: this is currently not executed. Waiting for fix https://github.com/StefanScherer/packer-windows/issues/322
 # You cannot enable Windows PowerShell Remoting on network connections that are set to Public
 # Spin through all the network locations and if they are set to Public, set them to Private
 # using the INetwork interface:
@@ -21,3 +22,4 @@ $connections |foreach {
 	$_.GetNetwork().SetCategory(1)
 	Write-Host $_.GetNetwork().GetName()"changed to category"$_.GetNetwork().GetCategory()
 }
+
